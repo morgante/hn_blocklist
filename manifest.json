@@ -15,9 +15,6 @@
         "http://news.ycombinator.com/*",
         "https://news.ycombinator.com/*"
       ],
-      "css": [
-        "css/inject.css"
-      ],
       "js": [
         "src/inject.js"
       ],
