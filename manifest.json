@@ -1,0 +1,27 @@
+{
+  "name": "hn_blocklist",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Block users on Hacker News",
+  "homepage_url": "https://github.com/morgante/hn_blocklist",
+  "permissions": [
+    "storage",
+    "http://news.ycombinator.com/*",
+    "https://news.ycombinator.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://news.ycombinator.com/*",
+        "https://news.ycombinator.com/*"
+      ],
+      "css": [
+        "css/inject.css"
+      ],
+      "js": [
+        "src/inject.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
