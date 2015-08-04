@@ -28,16 +28,22 @@
 				var username = item.querySelector("a").text;
 				var contents = item.querySelector(".comment span");
 
-				var actor = item.querySelector(".actor");
+				var seperator = item.querySelector(".hn_bl_seperator");
 
-				if (actor !== null) {
-					actor.remove();
-					actor = null;
+				if (seperator !== null) {
+					seperator.remove();
+					seperator = null;
 				}
 
-				actor = document.createElement('a');
+				seperator = document.createElement("span");
+				seperator.innerHTML = " | ";
+				seperator.className = "hn_bl_seperator";
+
+				var actor = document.createElement('a');
 				actor.href = "#";
-				actor.className = "actor";
+
+				item.querySelector(".comhead").appendChild(seperator);
+				seperator.appendChild(actor);
 
 				var blockedMessage = item.querySelector(".blocked");
 
@@ -68,8 +74,6 @@
 						return false;
 					};
 				}
-
-				item.querySelector(".comhead").appendChild(actor);
 			}
 
 			var comments = document.querySelectorAll(".default");
