@@ -1,20 +1,17 @@
 (function() {
 	function init() {
-		chrome.storage.sync.get("hn_banned", function(value) {
-			var users = value.hn_banned || {};
+		chrome.storage.local.get("hn_banned", function(value) {
+			var users = value.hn_banned || [];
 
 			function banUser(username) {
-				users[username] = {
-					username: username,
-					blocked: true,
-					timestamp: Date.now()
-				};
-				chrome.storage.sync.set({"hn_banned": users});
+				users.push(username);
+				chrome.storage.local.set({"hn_banned": users});
 			}
 
 			function unbanUser(username) {
-				delete users[username];
-				chrome.storage.sync.set({"hn_banned": users});
+				var i = users.indexOf(username);
+				if (i !== -1) users.splice(i, 1);
+				chrome.storage.local.set({"hn_banned": users});
 			}
 
 			function listener(changes, namespace) {
@@ -51,7 +48,7 @@
 					blockedMessage.remove();
 				}
 
-				if (users[username] !== undefined) {
+				if (users.includes(username)) {
 					contents.style.display = "none";
 
 					actor.innerHTML = "unblock";
